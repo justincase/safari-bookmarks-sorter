@@ -7,10 +7,10 @@ data = CFPropertyList.native_types(plist.value)
 bookmarks = data['Children']
 
 folders = bookmarks.select { |b| b['WebBookmarkType'] == 'WebBookmarkTypeList' }
-                   .sort_by! { |dir| dir['Title'] }
+                   .sort_by! { |dir| dir['Title'].downcase }
 
 leafs = bookmarks.select { |b| b['WebBookmarkType'] == 'WebBookmarkTypeLeaf' }
-                 .sort_by! { |l| l['URIDictionary']['title'] }
+                 .sort_by! { |l| l['URIDictionary']['title'].downcase }
 
 data['Children'] = []
 data['Children'].concat(folders)
